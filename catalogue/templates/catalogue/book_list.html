@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Readable</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- book_list.html content starts here -->
+
     <h1>Book List</h1>
     {% for book in object_list %}
     <h2>{{ book.title }}</h2>
@@ -16,5 +14,5 @@
     {% endif %}
     {% endfor %}
 
-</body>
-</html>
+<!-- book_list.html content ends here -->
+{% endblock %}
