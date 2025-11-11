@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readable</title>
+</head>
+<body>
+    <h1>Book List</h1>
+    {% for book in object_list %}
+    <h2>{{ book.title }}</h2>
+    <p>by {{ book.author }}</p>
+    <p>{{ book.tagline }}</p>
+    {% if book.recommended_by %}
+    <p>This book was recommended by: {{ book.recommended_by.username }}</p>
+    {% endif %}
+    {% endfor %}
+
+</body>
+</html>
