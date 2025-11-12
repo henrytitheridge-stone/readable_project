@@ -10,7 +10,7 @@
         <h2>{{ book.title }}</h2>
     </a>
     <p>by {{ book.author }}</p>
-    <p>{{ book.tagline }}</p>
+    <p><em>{{ book.tagline }}</em></p>
     {% if book.recommended_by %}
     <p>This book was recommended by: {{ book.recommended_by.username }}</p>
     {% endif %}
