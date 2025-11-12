@@ -6,7 +6,9 @@
 
     <h1>Book List</h1>
     {% for book in object_list %}
-    <h2>{{ book.title }}</h2>
+    <a href="{% url 'book_detail' book.slug %}">
+        <h2>{{ book.title }}</h2>
+    </a>
     <p>by {{ book.author }}</p>
     <p>{{ book.tagline }}</p>
     {% if book.recommended_by %}
