@@ -1,9 +1,83 @@
 {% extends 'base.html' %} {% block content %}
 {% load static %}
+{% load crispy_forms_tags %}
 
-<h1>{{ book.title }}</h1>
-<h2>by {{ book.author }}</h2>
-<p><em>{{ book.tagline }}</em></p>
-<p>{{ book.synopsis }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col card mb-4  mt-3 left  top">
+            <div class="card-body">
+                <!-- The post content goes inside the card-text. -->
+                <!-- Use the | safe filter inside the template tags -->
+                <article class="card-text">
+                    {{ book.synopsis | safe }}
+                </article>
+            </div>
+        </div>
+    </div>
+    <!-- Displaying count of comments -->
+  <div class="row">
+    <div class="col-12">
+      <strong class="text-secondary">
+        <i class="far fa-comments"></i> {{ review_count }} review(s)
+      </strong>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+  <!-- Displaying Comments -->
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <h3>Reviews:</h3>
+      <div class="card-body">
+        <!-- We want a for loop inside the empty control tags
+          to iterate through each comment in comments -->
+        {% for review in reviews %}
+        <div class="p-2 comments
+          {% if not review.approved and review.reviewer == user %}
+          faded{% elif not review.approved %} d-none{% endif %}">
+          <p class="font-weight-bold">
+            {{ review.reviewer }}
+            <span class="font-weight-normal">
+              {{ review.added_on }}
+            </span> wrote:
+          </p>
+          <div id="comment{{ review.id }}">
+            {{ review.body | linebreaks }}
+          </div>
+          {% if not review.approved and review.reviewer == user %}
+          <p class="approval">
+            This review is awaiting approval
+          </p>
+          {% endif %}
+          {% if user.is_authenticated and review.reviewer == user %}
+          <button class="btn btn-delete" data-review_id="{{ review.id }}">Delete</button>
+          <button class="btn btn-edit" data-review_id="{{ review.id }}">Edit</button>
+          {% endif %}
+        </div>
+        <!-- Our for loop ends here -->
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Creating New Comments -->
+    <div class="col-md-4 card mb-4 mt-3">
+      <div class="card-body">
+        {% if user.is_authenticated %}
+        <h3>Leave a review:</h3>
+        <p>Posting as: {{ user.username }}</p>
+        <form id="commentForm" method="post"
+          style="margin-top: 1.3em;">
+          {{ review_form | crispy }}
+          {% csrf_token %}
+          <button id="submitButton" type="submit"
+            class="btn btn-signup btn-lg">Submit</button>
+        </form>
+        {% else %}
+        <p>Log in to leave a review</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}

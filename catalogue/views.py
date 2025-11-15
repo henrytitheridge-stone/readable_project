@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from .models import Book
+from django.contrib import messages
+from .models import Book, Review
+from .forms import ReviewForm
 
 
 # Create your views here.
@@ -35,9 +37,28 @@ def book_detail(request, slug):
 
     queryset = Book.objects.filter(status=1)
     book = get_object_or_404(queryset, slug=slug)
+    reviews = book.reviews.all().order_by("-added_on")
+    review_count = book.reviews.filter(approved=True).count()
+
+    if request.method == "POST":
+        review_form = ReviewForm(data=request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.reviewer = request.user
+            review.book = book
+            review.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Review submitted and awaiting approval'
+            )
+
+    review_form = ReviewForm()
 
     return render(
         request,
         "catalogue/book_detail.html",
-        {"book": book,},
+        {"book": book,
+         "reviews": reviews,
+         "review_count": review_count,
+         "review_form": review_form},
     )

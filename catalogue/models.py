@@ -48,4 +48,4 @@ class Review(models.Model):
         ordering = ["-added_on"]
 
     def __str__(self):
-        return f"{self.rating} for {self.book.title} | reviewed by {self.reviewer}"
+        return f"{self.rating} stars for {self.book.title} | reviewed by {self.reviewer}"
