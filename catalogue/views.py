@@ -4,15 +4,15 @@ from .models import Book
 
 
 # Create your views here.
-def homepage(request):
+# def homepage(request):
 
-    recent_books = Book.objects.filter(status=1)[:3]
+#     recent_books = Book.objects.filter(status=1)[:3]
 
-    return render(
-        request, 
-        "catalogue/index.html",	
-        {"recent_books": recent_books,},
-    )	
+#     return render(
+#         request, 
+#         "catalogue/index.html",	
+#         {"recent_books": recent_books,},
+#     )	
 
 
 class BookList(generic.ListView):
@@ -24,11 +24,11 @@ class BookList(generic.ListView):
     ``queryset``
         All published instances of :model: `catalogue.Book`
     **Template**
-        :template: `catalogue/book_list.html`
+        :template: `catalogue/index.html`
     """
 
     queryset = Book.objects.filter(status=1)
-    template_name = "catalogue/book_list.html"
+    template_name = "catalogue/index.html"
 
 
 def book_detail(request, slug):
