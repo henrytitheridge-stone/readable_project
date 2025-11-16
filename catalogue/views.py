@@ -2,20 +2,9 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Book, Review
+from .models import Book, Recommendation, Review
+from .forms import RecommendationForm
 from .forms import ReviewForm
-
-
-# Create your views here.
-# def homepage(request):
-
-#     recent_books = Book.objects.filter(status=1)[:3]
-
-#     return render(
-#         request, 
-#         "catalogue/index.html",	
-#         {"recent_books": recent_books,},
-#     )	
 
 
 class BookList(generic.ListView):
@@ -98,3 +87,24 @@ def review_delete(request, slug, review_id):
         messages.add_message(request, messages.ERROR, 'You can only delete your own reviews!')
 
     return HttpResponseRedirect(reverse('book_detail', args=[slug]))
+
+
+def contact(request):
+
+    if request.method == "POST":
+        recommendation_form = RecommendationForm(data=request.POST)
+        if recommendation_form.is_valid():
+            recommendation_form.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Recommendation received! '
+                'I endeavour to respond within 2 working days.'
+            )
+
+    recommendation_form = RecommendationForm()
+
+    return render(
+        request,
+        "catalogue/contact.html",
+        {"recommendation_form": recommendation_form},
+    )

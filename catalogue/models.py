@@ -49,3 +49,18 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.rating} stars for {self.book.title} | reviewed by {self.reviewer}"
+
+
+class Recommendation(models.Model):
+    """
+    Stores a single book recommendation from a site visitor
+    """
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    book_title = models.CharField(max_length=200)
+    book_author = models.CharField(max_length=200)
+    book_synopsis = models.TextField()
+    seen = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Book recommendation from {self.name}"
