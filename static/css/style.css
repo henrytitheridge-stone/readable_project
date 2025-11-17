@@ -67,7 +67,7 @@ body {
 
 .book-author {
     margin-left: 5%;
-    color: lightgray;
+    color: white;
 }
 
 .btn-signup,
@@ -99,9 +99,9 @@ body {
 }
 
 
-.faded {
+/* .faded {
     color: rgb(172, 175, 175);
-}
+} */
 
 .approval {
     color: #F17300;

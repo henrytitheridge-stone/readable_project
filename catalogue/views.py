@@ -24,6 +24,22 @@ class BookList(generic.ListView):
 
 
 def book_detail(request, slug):
+    """
+    Display an individual :model:`catalogue.Book`.
+
+    **Context**
+    ``book``
+        An instance of :model:`catalogue.Book`.
+    ``reviews``
+        All approved reviews related to the book.
+    ``review_count``
+        A count of approved reviews related to the book.
+    ``review_form``
+        An instance of :form: `catalogue.ReviewForm`.
+
+    **Template:**
+    :template:`catalogue/book_detail.html`
+    """
 
     queryset = Book.objects.filter(status=1)
     book = get_object_or_404(queryset, slug=slug)
@@ -55,7 +71,17 @@ def book_detail(request, slug):
 
 
 def review_edit(request, slug, review_id):
+    """
+    Display an individual review to edit.
 
+    **Context**
+    ``book``
+        An instance of :model: `catalogue.Book`.
+    ``review``
+        A single review related to the book.
+    ``review_form``
+        An instance of :form: `catalogue.ReviewForm`
+    """
     if request.method == "POST":
         queryset = Book.objects.filter(status=1)
         book = get_object_or_404(queryset, slug=slug)
@@ -75,7 +101,15 @@ def review_edit(request, slug, review_id):
 
 
 def review_delete(request, slug, review_id):
+    """
+    Delete an individual review.
 
+    **Context**
+    ``book``
+        An instance of :model: `catalogue.Book`.
+    ``review``
+        A single review related to the book.
+    """
     queryset = Book.objects.filter(status=1)
     book = get_object_or_404(queryset, slug=slug)
     review = get_object_or_404(Review, pk=review_id)
@@ -90,6 +124,16 @@ def review_delete(request, slug, review_id):
 
 
 def contact(request):
+    """
+    Displays a form related to :model: `catalogue.Recommendation` for users to
+    recommend a book.
+    
+    **Context**
+    ``recommendation_form``
+        An instance of :form: `catalogue.RecommendationForm`.
+    **Template**
+    :template: `catalogue/contact.html`
+    """
 
     if request.method == "POST":
         recommendation_form = RecommendationForm(data=request.POST)

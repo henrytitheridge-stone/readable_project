@@ -25,6 +25,9 @@ class Book(models.Model):
     recommended_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='books_recommended')
 
     class Meta:
+        """
+        Specify order for most recently added books to be displayed first
+        """
         ordering = ["-added_on"]
 
     def __str__(self):
@@ -45,6 +48,9 @@ class Review(models.Model):
     approved = models.BooleanField(default=False)
 
     class Meta:
+        """
+        Specify order for most recently added reviews to be displayed first
+        """
         ordering = ["-added_on"]
 
     def __str__(self):
