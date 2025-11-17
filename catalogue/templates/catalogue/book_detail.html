@@ -60,10 +60,10 @@
           </p>
           {% endif %}
           {% if user.is_authenticated and review.reviewer == user %}
-          <button class="btn btn-delete" review_id="{{ review.id }}">Delete</button>
+          <button class="btn btn-delete" data-review_id="{{ review.id }}">Delete</button>
           <button
             class="btn btn-edit" 
-            review_id="{{ review.id }}" 
+            data-review_id="{{ review.id }}" 
             data-review-content="{{ review.body }}"
             data-review-title="{{ review.title }}" 
             data-review-rating="{{ review.rating }}">Edit
