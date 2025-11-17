@@ -2,16 +2,39 @@
 Readable is a social book cataloguing website, built using Django, which could be tailored for children, students and adults alike looking for a clean, simple book-browsing experience. Users can explore a catalogue of novels, read synopses and reviews, create an account to leave their own reviews and get in touch to recommend additions.
 
 ## User stories
+As the project evolved, user stories were ranked to create an MVP, prioritising site navigation and CRUD functionality.
 [Kanban board](https://github.com/users/henrytitheridge-stone/projects/5/views/1)
 ## Database
+Here are ERDs for the Book, Review and Recommendation models:
 
 ## Design
-
+The overall layout and user journey is adapted from the Code Institute walkthrogh blog example. The 'Poppins' font was chosen as it is clear and modern. In addition to high-contrasting black and white, colours such as 'Harvest Orange' and 'Yale Blue' were used consistently for titles, text, links and buttons. Default bootstrap classes ensured full responsivity. The following wireframes were used as initial outlines which were adapted as the project evolved:
 ## Features
 
 ## Testing
+| Feature area | Test case description | User status | Expected outcome | Result |
+| ------------ | --------------------- | ----------- | ---------------- | ------ |
+| **Navigation & UI** | Verify all primary navigation links lead to correct pages | Anonymous | Links function correctly, Home, Contact, Register, Login and book pages load as expected | PASS |
+| **Navigation & UI** | Check website responsiveness across different screen sizes (mobile, desktop) | Anonymous | Layout adapts correctly without breaking, including dropdown navbar | PASS |
+| **Book listings** | Navigate to homepage and verify content displays correctly, including book title, tagline and recommendations | Anonymous | Book data is present and accurate | PASS |
+| **Book details** | Access a 'book_detail' page and verify complete details, ie title, author, synopsis, review_count and any reviews are present | Anonymous | All book data and reviews are displayed correctly | PASS |
+| **Book details** | Try to leave a review while logged out | Anonymous | Review form hidden and message displayed next to review thread to log in to leave a review | PASS |
+| **Recommendation form** | Submit the form with valid data | Anonymous | Success message displayed and data recorded in admin panel | PASS |
+| **Recommendation form** | Submit the form with invalid data, ie empty fields or incorrect email format | Anonymous | Appropriate validation error messages appear | PASS |
+| **Registration** | Create a new user account with valid credentials, username and password | Anonymous | Instructions displayed, account created successfully, user logged in and status message changed | PASS |
+| **Registration** | Attempt registration with invalid password or mismatched confirmation fields | Anonymous | Appropriate validation error messages appear | PASS |
+| **Authentication** | Log in with valid credentials | Anonymous | User successfully authenticated, status message changed, 'Register' and 'Login' navbar links are replaced with just 'Logout' | PASS |
+| **Authentication** | Attempt login with incorrect password or username | Anonymous | 'The username and/or password you specified are not correct.' message displayed | PASS |
+| **Authentication** | Log out from an account | Authenticated | The user is directed to a confirmation page, the button click ends the session and redirects to the homepage with logout and status messages displayed/updated | PASS |
+| **Review submission** | Leave a review on a book detail page | Authenticated | Review form displayed next to review thread, including title, rating and body fields; on submission a 'faded' version appears in thread with 'pending approval' message | PASS |
+| **Review submission** | Attempt to submit an empty review form | Authenticated | Appropriate validation error messages appear | PASS |
+| **User: Review management** | Edit or delete an existing review on the book detail page | Authenticated | Edit and delete buttons present underneath user's own reviews only; content reappears in form fields, approval message reappears on resubmission; or delete confirmation modal directs user and review removed | PASS |  
+| **Admin: Review management** | Access and moderate, ie approve or delete submitted reviews from the admin panel | Admin | Reviews are listed in the admin panel, approval or deletion updates the frontend to correctly add or remove the review on the related book_detail page | PASS |
+| **Book management** | Add a new book via the Django admin interface | Admin | New book is viewable on the frontend website | PASS |
+| **Book management** | Edit an exisiting book's details or delete it completely via the admin interface | Admin | Changes or removals are instantly reflected on the frontend | PASS |
+| **Recommendation management** | Verify all submitted recommendation forms are recorded in the admin | Admin | All entries are present and accessible for processing | PASS |
 
-### Validation
+### Validation & fixes
 
 ## Future developments
 
@@ -85,7 +108,7 @@ Readable is a social book cataloguing website, built using Django, which could b
         - Adding the whitehoise MIDDLEWARE and backend STORAGES to settings.py
     - Ran 'python manage.py collectstatic' to create staticfiles directory and initial cache
     - Added 3.12 to .python-version file
-- DEPLOYMENT: Remove DISABLE_COLLECTSTATIC config var from the Heroku app before re-deploying
+- DEPLOYMENT: Removed DISABLE_COLLECTSTATIC config var from the Heroku app before re-deploying
 #### Forms and HTTP methods
 - Finally, the site was protected against Cross-Site Request Forgery by: 
     - Adding //localhost and //*.herokuapp.com domains to CSRF_TRUSTED_ORIGINS in settings.py
