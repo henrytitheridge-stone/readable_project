@@ -6,11 +6,17 @@
 
     <div class="row justify-content-center">
         <div class="col-12 col-md-6 my-5">
+            <h2>Recommend a book!</h2>
+            <p>Maybe you have a favourite book you'd like to share 
+                or maybe one you struggled with and you'd like to
+                know what other readers think. If you can't find the title in
+                our catalogue, feel free to get in touch below and suggest we add it.
+            </p>
             
             <form method="post">
                 {{ recommendation_form | crispy }}
                 {% csrf_token %}
-                <button class="btn btn-secondary" type="submit">Submit</button>
+                <button class="btn btn-signup" type="submit">Submit</button>
             </form>
 
         </div>

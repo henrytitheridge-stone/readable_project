@@ -2,52 +2,58 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+<div class="masthead">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-md-6 masthead-text">
+                
+                <h1 class="book-title">{{ book.title }}</h1>
+                
+                <p class="book-author">by {{ book.author }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col card mb-4  mt-3 left  top">
             <div class="card-body">
-                <!-- The post content goes inside the card-text. -->
-                <!-- Use the | safe filter inside the template tags -->
+                <h4>Synopsis:</h4>
+                <br>
                 <article class="card-text">
                     {{ book.synopsis | safe }}
                 </article>
             </div>
         </div>
     </div>
-    <!-- Displaying count of comments -->
+    <!-- Displaying count of reviews -->
   <div class="row">
     <div class="col-12">
-      <strong class="text-secondary">
-        <i class="far fa-comments"></i> {{ review_count }} review(s)
-      </strong>
+      <strong class="text-secondary">{{ review_count }} review(s)</strong>
     </div>
     <div class="col-12">
       <hr>
     </div>
   </div>
-  <!-- Displaying Comments -->
+
+  <!-- Displaying reviews -->
   <div class="row">
     <div class="col-md-8 card mb-4  mt-3 ">
       <h3>Reviews:</h3>
       <div class="card-body">
-        <!-- We want a for loop inside the empty control tags
-          to iterate through each comment in comments -->
+        
         {% for review in reviews %}
-        <div class="p-2 comments
+        <div class="p-2 reviews
           {% if not review.approved and review.reviewer == user %}
           faded{% elif not review.approved %} d-none{% endif %}">
-          <p class="font-weight-bold">
-            {{ review.reviewer }}
-            <span class="font-weight-normal">
-              {{ review.added_on }}
-            </span> wrote:
-          </p>
+          
           <h4 id="title{{ review.id }}">{{ review.title }}</h4>
-          <p id="rating{{ review.id }}">{{ review.rating }} Stars</p>
+          <p id="rating{{ review.id }}">{{ review.rating }}/5 stars</p>
+          <p class="font-weight-normal">Reviewed by {{ review.reviewer }}
+            on {{ review.added_on }}</p>
           <p id="review{{ review.id }}">{{ review.body | linebreaks }}</p>
-          <!-- <div id="review{{ review.id }}">
-            {{ review.body | linebreaks }}
-          </div> -->
+          
           {% if not review.approved and review.reviewer == user %}
           <p class="approval">
             This review is awaiting approval
@@ -66,11 +72,11 @@
         
           {% endif %}
         </div>
-        <!-- Our for loop ends here -->
+        
         {% endfor %}
       </div>
     </div>
-    <!-- Creating New Comments -->
+    <!-- Leaving new reviews -->
     <div class="col-md-4 card mb-4 mt-3">
       <div class="card-body">
         {% if user.is_authenticated %}
@@ -98,12 +104,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"
-          id="deleteModalLabel">Delete comment?</h5>
+          id="deleteModalLabel">Delete review?</h5>
         <button type="button" class="btn-close"
           data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete your comment?
+        Are you sure you want to delete your review?
         This action cannot be undone.
       </div>
       <div class="modal-footer">
