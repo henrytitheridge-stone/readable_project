@@ -11,7 +11,7 @@ Here are ERDs for the Book, Review and Recommendation models:
 The overall layout and user journey is adapted from the Code Institute walkthrogh blog example. The 'Poppins' font was chosen as it is clear and modern. In addition to high-contrasting black and white, colours such as 'Harvest Orange' and 'Yale Blue' were used consistently for titles, text, links and buttons. Default bootstrap classes ensured full responsivity. The following wireframes were used as initial outlines which were adapted as the project evolved:
 ## Features
 
-## Testing
+## Manual testing
 | Feature area | Test case description | User status | Expected outcome | Result |
 | ------------ | --------------------- | ----------- | ---------------- | ------ |
 | **Navigation & UI** | Verify all primary navigation links lead to correct pages | Anonymous | Links function correctly, Home, Contact, Register, Login and book pages load as expected | PASS |
