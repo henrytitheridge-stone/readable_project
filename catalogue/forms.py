@@ -23,4 +23,5 @@ class RecommendationForm(forms.ModelForm):
         Specify the django model and order of the fields
         """
         model = Recommendation
-        fields = ('name', 'email', 'book_title', 'book_author', 'book_synopsis')
+        fields = ('name', 'email', 'book_title', 'book_author',
+                  'book_synopsis')

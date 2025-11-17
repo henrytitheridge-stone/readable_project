@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Book, Recommendation, Review
+from .models import Book, Review
 from .forms import RecommendationForm
 from .forms import ReviewForm
 
@@ -127,7 +127,7 @@ def contact(request):
     """
     Displays a form related to :model: `catalogue.Recommendation` for users to
     recommend a book.
-    
+
     **Context**
     ``recommendation_form``
         An instance of :form: `catalogue.RecommendationForm`.

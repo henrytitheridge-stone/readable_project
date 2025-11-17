@@ -4,12 +4,40 @@ Readable is a social book cataloguing website, built using Django, which could b
 ## User stories
 As the project evolved, user stories were ranked to create an MVP, prioritising site navigation and CRUD functionality.
 [Kanban board](https://github.com/users/henrytitheridge-stone/projects/5/views/1)
+
 ## Database
 Here are ERDs for the Book, Review and Recommendation models:
+![book, review and recommendation ERDs](static/images/readable-project-ERDs.png)
 
 ## Design
 The overall layout and user journey is adapted from the Code Institute walkthrogh blog example. The 'Poppins' font was chosen as it is clear and modern. In addition to high-contrasting black and white, colours such as 'Harvest Orange' and 'Yale Blue' were used consistently for titles, text, links and buttons. Default bootstrap classes ensured full responsivity. The following wireframes were used as initial outlines which were adapted as the project evolved:
+![Homepage wireframes](static/images/homepage-wireframes.png)
+![Wireframes for book detail page, logged out](static/images/detail-anon-wireframes.png)
+![Wireframes for book detail page, logged in](static/images/detail-auth-wireframes.png)
+![Contact page wireframes](static/images/contact-wireframes.png)
+
 ## Features
+The navbar includes the site name and links to home, contact, register or login.
+![navbar on desktop](static/images/navbar-desktop.png)
+These change to home, contact and logout for logged-in users. The current page link displays in bold.
+![navbar authenticated](static/images/navbar-authenticated.png)
+On smaller screens the navbar becomes a dropdown 'burger' menu.
+![navbar mobile](static/images/navbar-mobile.png)
+
+On the homepage, books are listed with their titles, authors and an engaging tagline consisting of a dramatic summary or quote. The book info acts as a link which changes colour when hovered over.
+![homepage with hover](static/images/homepage-with-hover.png)
+
+The book detail pages consist of a title banner including the book title and author above a short synopsis. Below this is a count of reviews and for anonymous users, just the review thread.
+![book detail page](static/images/book-detail-page-anon.png)
+
+Authenticated users see a review form to leave a review and clear bright 'Edit' and 'Delete' buttons next to their own previous reviews. Once submitted, reviews appear faded in the thread with a pending approval message until the admin has verified them. Reviews include a title, rating out of 5 stars and a body of text.
+![logged-in book detail page](static/images/book-detail-page-auth.png)
+
+The contact page is comprised of a form for any site user, authenticated or otherwise, to recommend a book title to be added to the database.
+![contact form](static/images/contact-form.png)
+
+Confirmation messages like this appear for logging in and out, submitting a review and submitting a recommendation.
+![message example](static/images/message-example.png)
 
 ## Manual testing
 | Feature area | Test case description | User status | Expected outcome | Result |
@@ -34,10 +62,40 @@ The overall layout and user journey is adapted from the Code Institute walkthrog
 | **Book management** | Edit an exisiting book's details or delete it completely via the admin interface | Admin | Changes or removals are instantly reflected on the frontend | PASS |
 | **Recommendation management** | Verify all submitted recommendation forms are recorded in the admin | Admin | All entries are present and accessible for processing | PASS |
 
-### Validation & fixes
-
+### Validation
+#### HTML & CSS
+Homepage html validation:
+![homepage html validation](static/images/home-html-validator.png)
+Logged-out book detail html validation:
+![anonymous user book detail page validation](static/images/detail-anon-validator.png)
+Logged-in book detail html validation:
+![authenticated user book detail page validation](static/images/detail-auth-validator.png)
+Contact page html validation:
+![contact page html validation](static/images/contact-html-validator.png)
+Custom CSS validation:
+![css validation](static/images/css-validator.png)
+#### JavaScript & Python
+- No errors were returned when passing through the official [Jshint validator](https://jshint.com/)
+- The following metrics were returned: ![jshint results](static/images/jshint-validator.png)
+- Using the Flake8 extension in VSCode allowed me to avoid Python linting errors throughout
+    - Some 'line too long' errors have been left in the interests of time as they aren't affecting functionality:![pep8 results](static/images/pep8-validator.png)
+#### Lighthouse scores
+Homepage- mobile results:
+![homepage mobile lighthouse scores](static/images/homepage-mobile-lighthouse.png)
+Homepage- desktop results:
+![homepage desktop lighthouse scores](static/images/homepage-desktop-lighthouse.png)
+Book detail page- mobile results:
+![detail page mobile lighthouse scores](static/images/detail-mobile-lighthouse.png)
+Book detail page- desktop results:
+![detail page desktop lighthouse scores](static/images/detail-desktop-lighthouse.png)
+Contact page- mobile results:
+![contact page mobile lighthouse scores](static/images/contact-mobile-lighthouse.png)
+Contact page- desktop results:
+![contact page desktop lighthouse scores](static/images/contact-desktop-lighthouse.png)
+ 
 ## Future developments
-
+- Add book cover images
+- Add wishlist functionality
 
 
 ## Development & Deployment
@@ -117,5 +175,3 @@ The overall layout and user journey is adapted from the Code Institute walkthrog
 ## Credits
 - Example code from the Code Institute 'I Think Therefore I Blog' walkthrough project
 - Book information from [Penguin](https://www.penguin.co.uk/discover/articles/100-must-read-classic-books) and [Amazon](https://www.amazon.co.uk/books) 
-- Preview screens from [Am I Responsive?](https://ui.dev/amiresponsive)
-- PEP8 validation run through the [CI Python Linter](https://pep8ci.herokuapp.com/)
